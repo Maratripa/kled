@@ -1,0 +1,20 @@
+Hello, world!
+This is a test file.
+I'm writing this for my text editor.
+It's a simple editor with basic features.
+I hope it works well.
+This is line number six.
+this line was modified x2
+Testing, testing, 1, 2, 3.
+The quick brown fox jumps over the lazy dog.
+Today is a beautiful day.
+I like to go for long walks in the park.
+The sun is shining brightly.
+I can feel a gentle breeze on my face.
+It's so peaceful and relaxing.
+Time flies when you're having fun.
+I'm almost halfway through the lines.
+Just a few more to go.
+Writing is a great way to express yourself.
+I enjoy playing video games in my free time.
+That's it, we're done!
