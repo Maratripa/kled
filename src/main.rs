@@ -7,7 +7,7 @@ use std::{
 mod functions;
 mod parser;
 
-use functions::replace_line;
+use functions::{delete_line, replace_line};
 use parser::parse_command;
 
 fn main() {
@@ -40,6 +40,19 @@ fn main() {
                 let new_content = &tokens[2];
 
                 replace_line(&path, line_number, new_content);
+            }
+            "delete" => {
+                if tokens.len() < 2 {
+                    eprintln!("Not enough arguments, delete command takes a line number to delete");
+                    eprintln!("Usage: delete [line number]");
+                    process::exit(2);
+                }
+
+                let line_number: usize = tokens[1]
+                    .parse()
+                    .expect("[line number] argument not a number");
+
+                delete_line(&path, line_number);
             }
             _ => {
                 eprintln!("Command '{}' not found", &tokens[0]);

@@ -1,7 +1,6 @@
 Hello, world!
 This is a test file.
 I'm writing this for my text editor.
-It's a simple editor with basic features.
 I hope it works well.
 This is line number six.
 this line was modified x2

@@ -51,3 +51,29 @@ pub fn replace_line(path: &str, line_number: usize, new_content: &str) {
     // replace the original file with the new file
     fs::rename(new_file_path, path).expect("failed to replace file");
 }
+
+pub fn delete_line(path: &str, line_number: usize) {
+    // open file
+    let file = File::open(path).expect("failed to open file");
+    let reader = BufReader::new(file);
+
+    // create temp file
+    let new_file_name = generate_unique_tempname();
+    let new_file = File::create(&new_file_name).expect("failed to create new file");
+    let mut writer = BufWriter::new(new_file);
+
+    for (i, line) in reader.lines().enumerate() {
+        if i + 1 != line_number {
+            let mut line = line.expect("failed to read line");
+            line.push('\n');
+            writer
+                .write_all(line.as_bytes())
+                .expect("failed to write line");
+        }
+    }
+    // flush the writer to ensure all data is writtern to the file
+    writer.flush().expect("failed to flush");
+
+    // replace the original file with the new file
+    fs::rename(new_file_name, path).expect("failed to replace file");
+}
