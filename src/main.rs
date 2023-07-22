@@ -7,7 +7,7 @@ use std::{
 mod functions;
 mod parser;
 
-use functions::{delete_line, replace_line};
+use functions::{append_line, delete_line, insert_line, replace_line};
 use parser::parse_command;
 
 fn main() {
@@ -53,6 +53,32 @@ fn main() {
                     .expect("[line number] argument not a number");
 
                 delete_line(&path, line_number);
+            }
+            "append" => {
+                if tokens.len() < 2 {
+                    eprintln!("Not enough arguments, append command takes the content to write to append to the end.");
+                    eprintln!("Usage: append [new content]");
+                    process::exit(2);
+                }
+
+                let new_content = &tokens[1];
+
+                append_line(&path, new_content);
+            }
+            "insert" => {
+                if tokens.len() < 3 {
+                    eprintln!("Not enough arguments, insert command takes a line number and the content to insert at that position.");
+                    eprintln!("Usage: insert [line number] [new content]");
+                    process::exit(2);
+                }
+
+                let line_number: usize = tokens[1]
+                    .parse()
+                    .expect("[line number] argument not a number");
+
+                let new_content = &tokens[2];
+
+                insert_line(&path, line_number, new_content);
             }
             _ => {
                 eprintln!("Command '{}' not found", &tokens[0]);
